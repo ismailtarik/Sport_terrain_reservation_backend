@@ -36,21 +36,21 @@ services:
     networks:
       - app-network
 
-  admin-server:
-    build:
-      context: ./admin-server
-    container_name: admin-server
-    ports:
-      - "8080:8080"
-    environment:
-      ADMIN_SERVER_URL: "http://admin-server:8080"
-    networks:
-      - app-network
-    healthcheck:
-      test: curl -f http://localhost:8080/actuator/health || exit 1
-      interval: 40s
-      timeout: 30s
-      retries: 3
+#  admin-server:
+#    build:
+#      context: ./admin-server
+#    container_name: admin-server
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      ADMIN_SERVER_URL: "http://admin-server:8080"
+#    networks:
+#      - app-network
+#    healthcheck:
+#      test: curl -f http://localhost:8080/actuator/health || exit 1
+#      interval: 40s
+#      timeout: 30s
+#      retries: 3
 
 #  config-server:
 #    build:
@@ -86,7 +86,7 @@ services:
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
       DISCOVER-SERVER-URL: http://discovery-service:8761/eureka
-      ADMIN_SERVER_URL: http://admin-server:8080
+#      ADMIN_SERVER_URL: http://admin-server:8080
 
     ports:
       - "8084:8084"
@@ -114,7 +114,7 @@ services:
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
       DISCOVER-SERVER-URL: http://discovery-service:8761/eureka
-      ADMIN_SERVER_URL: http://admin-server:8080
+#      ADMIN_SERVER_URL: http://admin-server:8080
     networks:
       - app-network
   center-service-db:
@@ -154,7 +154,7 @@ services:
       - "9091:9092" # Mappez le port de l'application
     environment:
       DISCOVER-SERVER-URL: http://discovery-service:8761/eureka
-      ADMIN_SERVER_URL: http://admin-server:8080
+#      ADMIN_SERVER_URL: http://admin-server:8080
     networks:
       - app-network
 
@@ -167,7 +167,7 @@ services:
       - "9090:9093" # Mappez le port de l'application
     environment:
       DISCOVER-SERVER-URL: http://discovery-service:8761/eureka
-      ADMIN_SERVER_URL: http://admin-server:8080
+#      ADMIN_SERVER_URL: http://admin-server:8080
     networks:
       - app-network
 
@@ -181,12 +181,12 @@ services:
       - "8086:8086"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:postgresql://reservation-service-db:5432/reservationdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://reservation-service-db:5432/reservation
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: lamaachi
+      SPRING_DATASOURCE_PASSWORD: 00990099
       SPRING_JPA_HIBERNATE_DDL_AUTO: create
       DISCOVER-SERVER-URL: http://discovery-service:8761/eureka
-      ADMIN_SERVER_URL: http://admin-server:8080
+#      ADMIN_SERVER_URL: http://admin-server:8080
     networks:
       - app-network
 
@@ -194,9 +194,9 @@ services:
     image: postgres:13
     container_name: reservation-service-db
     environment:
-      POSTGRES_DB: reservationdb
+      POSTGRES_DB: reservation
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: lamaachi
+      POSTGRES_PASSWORD: 00990099
     ports:
       - "5435:5432"
     volumes:

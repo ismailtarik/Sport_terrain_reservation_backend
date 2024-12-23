@@ -1,6 +1,6 @@
 package org.projet.authservice;
 
-import org.projet.authservice.RabbitMQ.AuthEventProducer;
+//import org.projet.authservice.RabbitMQ.AuthEventProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,8 @@ public class AuthController {
     @Autowired
     private CognitoAuthService cognitoAuthService;
 
-    @Autowired
-    private AuthEventProducer authEventProducer;
+//    @Autowired
+//    private AuthEventProducer authEventProducer;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
@@ -38,7 +38,7 @@ public class AuthController {
                     username,
                     LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
             );
-            authEventProducer.sendAdminAuthMessage(message);
+//            authEventProducer.sendAdminAuthMessage(message);
 
             return ResponseEntity.ok(Map.of("token", token));
         } catch (AuthenticationException e) {
